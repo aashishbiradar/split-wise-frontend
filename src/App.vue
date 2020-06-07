@@ -1,10 +1,10 @@
 <template>
   <v-app>
     <div class="app-container">
-      <div class="main">
+      <v-sheet class="main">
         <app-bar/>
         <router-view/>
-      </div>
+      </v-sheet>
     </div>
   </v-app>
 </template>
