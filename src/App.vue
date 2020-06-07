@@ -14,6 +14,10 @@ import AppBar from './components/AppBar'
 export default {
   name: 'App',
   components: { AppBar },
+  beforeCreate() {
+    const appReady = this.$store.dispatch('authenticate');
+    this.$store.dispatch('appReady', appReady);
+  }
 };
 </script>
 
@@ -25,7 +29,7 @@ export default {
 .main{
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  min-height: 100vh;
   max-width: 500px;
   min-width: 320px;
   width: 100%;

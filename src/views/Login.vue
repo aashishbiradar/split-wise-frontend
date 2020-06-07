@@ -5,14 +5,16 @@
         <v-container>
           <v-row>
             <v-text-field
-              :append-icon="mdiAt"
+              v-model="email"
+              :append-icon="icons.mdiAt"
               label="Email"
-              placeholder="johnsnow@targaryen.com"
+              placeholder="johnsnow@thewall.com"
             ></v-text-field>
           </v-row>
           <v-row>
             <v-text-field
-              :append-icon="mdiLockQuestion"
+              v-model="password"
+              :append-icon="icons.mdiLockQuestion"
               label="Password"
               placeholder="********"
               type="password"
@@ -25,7 +27,7 @@
               color="primary"
               height="40"
             >
-            <v-icon>{{ mdiShieldKey }}</v-icon> Login
+            <v-icon>{{ icons.mdiShieldKey }}</v-icon> Login
             </v-btn>
           </v-row>
         </v-container>
@@ -39,11 +41,31 @@ import { mdiAt, mdiLockQuestion, mdiShieldKey } from '@mdi/js';
 
 export default {
   name: 'Login',
+  async beforeCreate() {
+    const isLoggedIn = this.$store.getters.isLoggedIn;
+    console.log(isLoggedIn);
+    if (isLoggedIn) {
+      this.$router.push('/');
+    }
+  },
   data: () => ({
-      mdiAt: mdiAt,
-      mdiLockQuestion: mdiLockQuestion,
-      mdiShieldKey: mdiShieldKey
+      icons: {
+        mdiAt,
+        mdiLockQuestion,
+        mdiShieldKey
+      },
+      email: null,
+      password: null
   }),
+  methods: {
+    async login() {
+      const { email, password } = this
+      const { error } = await this.$store.dispatch('login', { email, password });
+      if (!error) {
+        this.$router.push('/');
+      }
+    }
+  }
 }
 </script>
 
