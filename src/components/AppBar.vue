@@ -36,7 +36,7 @@ export default {
 
 <style scoped>
 .brand {
-  margin-left: calc(50% - 96px);;
+  margin-left: calc(50% - 86px);;
 }
 .brand-name {
   text-decoration: none;
